@@ -9,48 +9,50 @@
 #
 
 def nthprime_list(num, primelist=[2]):
-    toadd = 2
-    while len(primelist)<=num-1:
-        toadd+=1
+    toadd = primelist[-1] + 1 
+    while len(primelist) <= num - 1:
+        toadd += 1
         devisable = False
         for j in primelist:
             if j > (toadd**(1.0/2.0)):
                 break
 
-            if toadd%j == 0:
+            if toadd % j == 0:
                 devisable = True
         if not devisable:
             primelist.append(toadd)
-            toadd+=1
+            toadd += 1
     return primelist
 
 def prime_factors(n):
     i = 2
     leftover = n
     factors = []
-    for i in nthprime_list(int(n**(1.0/2.0))):
-        while leftover%i == 0:
+    n_root = int(n ** (1.0 / 2.0))
+    p_list = nthprime_list(n_root)
+    for i in p_list:
+        while leftover % i == 0:
             factors.append(i)
-            leftover = leftover/i
+            leftover = leftover / i
     if not leftover == 1:
-        factors.append(leftover)
+        factors.append(int(leftover))
     return factors
 
 def groups_with_first(newlist, pre=[]):
     if len(newlist) == 0:
-        return [pre+[]]
+        return [pre + []]
     result = []
     #result = result + [pre+[[newlist[0]]]]
     #print newlist[1:],pre+[[newlist[0]]]
-    temp = groups_with_first(newlist[1:],pre+[[newlist[0]]])
+    temp = groups_with_first(newlist[1:],pre + [[newlist[0]]])
     result = result + temp
-    for i in range(1,len(newlist)):
+    for i in range(1, len(newlist)):
         temp = groups_with_first(newlist[i:])
         #print "pre", pre, "temp" , temp, "newlist", newlist
         end = []
         for i in newlist[1:i]:
             end.append([i])
-        result = result + map(lambda x:  pre+[[newlist[0]]+x[0]]+x[1:]+end,temp)
+        result = result + map(lambda x:  pre + [[newlist[0]] + x[0]] + x[1:] + end, temp)
     return result
 
 
@@ -195,6 +197,3 @@ def recuse_over_factors(factor_list,prefix):
 # print []
 # solution = 'solution',recuse_over_factors([2,3],[[1]])
 # temp_list = [1,2,3,5,7]
-print(recuse_over_factors([2,3,5,7],[[]]))
-
-
