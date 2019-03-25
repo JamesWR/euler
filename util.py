@@ -12,10 +12,10 @@ import itertools
 import math
 
 
-def nthprime_list(num, primelist=[2]):
-    toadd = primelist[-1] + 1
+def nthprime_list(num, primelist=[2, 3]):
+    toadd = primelist[-1]
     while len(primelist) <= num - 1:
-        toadd += 1
+        toadd += 2
         devisable = False
         for j in primelist:
             if j > (toadd ** (1.0 / 2.0)):
@@ -26,14 +26,13 @@ def nthprime_list(num, primelist=[2]):
                 break
         if not devisable:
             primelist.append(toadd)
-            toadd += 1
     return primelist
 
 
-def prime_under_list(num, primelist=[2]):
-    toadd = primelist[-1] + 1
+def prime_under_list(num, primelist=[2, 3]):
+    toadd = primelist[-1]
     while primelist[-1] < num:
-        toadd += 1
+        toadd += 2
         devisable = False
         for j in primelist:
             if j > (toadd ** (1.0 / 2.0)):
@@ -44,7 +43,6 @@ def prime_under_list(num, primelist=[2]):
                 break
         if not devisable:
             primelist.append(toadd)
-            toadd += 1
     return primelist
 
 
