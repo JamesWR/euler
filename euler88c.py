@@ -11,7 +11,7 @@
 #optimal non int is n*(n**(1/(n-1)))
 
 #(n-x)+2x=2^x
-import euler88tools
+import util
 
 def eul88(num):
 	found_lengths = []
@@ -19,9 +19,9 @@ def eul88(num):
 	solution = []
 	for i in range(4,num*2):
 		used = False
-		factors = euler88tools.prime_factors(i)
-		factor_sets = euler88tools.recuse_over_factors(factors,[[]])
-		lengths = map(lambda x:euler88tools.solve_length_for_numbers(x),factor_sets)
+		factors = util.prime_factors(i)
+		factor_sets = util.recuse_over_factors(factors,[[]])
+		lengths = map(lambda x:util.solve_length_for_numbers(x),factor_sets)
 		for length in lengths:
 			if not length in found_lengths and length <= 12000:
 				found_lengths.append(length)
