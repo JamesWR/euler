@@ -29,7 +29,7 @@ def nthprime_list(num, primelist=[2, 3]):
     return primelist
 
 
-def prime_under_list(num, primelist=[2, 3]):
+def prime_under_list(num, primelist=[2, 3, 5, 7]):
     toadd = primelist[-1]
     while primelist[-1] < num:
         toadd += 2
